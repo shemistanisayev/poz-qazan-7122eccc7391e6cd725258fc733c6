@@ -1,0 +1,1596 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Satış şəbəkəsinə bax, key: 3e5549a5'
+            label: Text
+            name: 3e5549a5
+            widget: string
+          - hint: >-
+              Original text: Poz-Qazan ilə milyonlarla uduşlar indi hər yerdə!,
+              key: 1baf1324
+            label: Text
+            name: 1baf1324
+            widget: string
+          - hint: >-
+              Original text: Poz-Qazan biletlərində milyonlarla uduşlar səni
+              gözləyir., key: 2d030711
+            label: Text
+            name: 2d030711
+            widget: string
+          - hint: 'Original text: Bütün oyunlara bax, key: 53d7c7d4'
+            label: Text
+            name: 53d7c7d4
+            widget: string
+          - hint: 'Original text: Bizim qaliblər, key: -4e87b47'
+            label: Text
+            name: '-4e87b47'
+            widget: string
+          - hint: >-
+              Original text: Bəxtəvər qaliblərlərimizdən biri də sən ol!, key:
+              3479b9a9
+            label: Text
+            name: 3479b9a9
+            widget: string
+          - hint: 'Original text: Böyük uduşlar səni gözləyir., key: b6b4aad'
+            label: Text
+            name: b6b4aad
+            widget: string
+          - hint: >-
+              Original text: Milyonlarla insan uduş qazandı! Poz-Qazan oyunları
+              ilə şansını sına, növbəti bəxtəvər sən ola bilərsən!, key:
+              53c6958b
+            label: Text
+            name: 53c6958b
+            widget: text
+          - hint: 'Original text: Necə oynamalı?, key: -3b368c6a'
+            label: Text
+            name: '-3b368c6a'
+            widget: string
+          - hint: >-
+              Original text: Biletlərin üzərindəki uduşlu xanaları poz və hər
+              oyunun öz qaydalarına əsasən müvafiq uduş məbləğini qazan., key:
+              -182b116c
+            label: Text
+            name: '-182b116c'
+            widget: text
+          - hint: 'Original text: Uduşları necə almaq olar?, key: -311c57dd'
+            label: Text
+            name: '-311c57dd'
+            widget: string
+          - hint: 'Original text: 3000 manatadək, key: -7e67a621'
+            label: Text
+            name: '-7e67a621'
+            widget: string
+          - hint: >-
+              Original text: Satış nöqtələrindən əldə etmək mümkündür, key:
+              295f6a62
+            label: Text
+            name: 295f6a62
+            widget: string
+          - hint: 'Original text: 3000 manatdan çox, key: -614f2d89'
+            label: Text
+            name: '-614f2d89'
+            widget: string
+          - hint: 'Original text: *, key: 2a'
+            label: Text
+            name: 2a
+            widget: string
+          - hint: >-
+              Original text: Ziya Bünyadov Prospekti 38C (Bakı KOB Evi), key:
+              -4ae87ef5
+            label: Text
+            name: '-4ae87ef5'
+            widget: string
+          - hint: 'Original text: Bakı, key: 1f7ac5'
+            label: Text
+            name: 1f7ac5
+            widget: string
+          - hint: 'Original text: Xəritədə bax, key: -26ee5475'
+            label: Text
+            name: '-26ee5475'
+            widget: string
+          - hint: 'Original text: Fətullah Həsənov küçəsi 15B, key: e2df09e'
+            label: Text
+            name: e2df09e
+            widget: string
+          - hint: 'Original text: Gəncə, key: 4fb6312'
+            label: Text
+            name: 4fb6312
+            widget: string
+          - hint: >-
+              Original text: Uduş məbləği “Azərlotereya” ASC tərəfindən uduşlu
+              lotereya bileti qəbul edildiyi tarixdən etibarən 30 iş günündən
+              gec olmayaraq bank vasitəsilə ödənilir., key: -5b61b5a7
+            label: Text
+            name: '-5b61b5a7'
+            widget: text
+          - hint: 'Original text: Poz-Qazan oyunları, key: -8113e6e'
+            label: Text
+            name: '-8113e6e'
+            widget: string
+          - hint: 'Original text: Öz uğurlu Poz-Qazan biletini seç., key: aa8307a'
+            label: Text
+            name: aa8307a
+            widget: string
+          - hint: 'Original text: Hamısı, key: -7f9616e5'
+            label: Text
+            name: '-7f9616e5'
+            widget: string
+          - hint: 'Original text: 1 AZN, key: 2c20ac6'
+            label: Text
+            name: 2c20ac6
+            widget: string
+          - hint: 'Original text: 2 AZN, key: 2d02247'
+            label: Text
+            name: 2d02247
+            widget: string
+          - hint: 'Original text: 3 AZN, key: 2de39c8'
+            label: Text
+            name: 2de39c8
+            widget: string
+          - hint: 'Original text: 5 AZN, key: 2fa68ca'
+            label: Text
+            name: 2fa68ca
+            widget: string
+          - hint: 'Original text: 10 AZN, key: 565169b4'
+            label: Text
+            name: 565169b4
+            widget: string
+          - hint: 'Original text: 1₼, key: 26ab'
+            label: Text
+            name: 26ab
+            widget: string
+          - hint: 'Original text: Qızıl, key: 5020455'
+            label: Text
+            name: '5020455'
+            widget: string
+          - hint: 'Original text: BÖYÜK UDUŞ, key: 12d8f64'
+            label: Text
+            name: 12d8f64
+            widget: string
+          - hint: 'Original text: 25,000₼, key: -4e14ddab'
+            label: Text
+            name: '-4e14ddab'
+            widget: string
+          - hint: 'Original text: Tap, Qazan!, key: 50129401'
+            label: Text
+            name: '50129401'
+            widget: string
+          - hint: 'Original text: 2₼, key: 26ca'
+            label: Text
+            name: 26ca
+            widget: string
+          - hint: 'Original text: Uğurlu 7, key: -65ff6099'
+            label: Text
+            name: '-65ff6099'
+            widget: string
+          - hint: 'Original text: 50,000₼, key: 481598fd'
+            label: Text
+            name: 481598fd
+            widget: string
+          - hint: 'Original text: Ani 50, key: 7529537f'
+            label: Text
+            name: 7529537f
+            widget: string
+          - hint: 'Original text: 3₼, key: 26e9'
+            label: Text
+            name: '26e9'
+            widget: string
+          - hint: 'Original text: Qızıl Ekstra, key: -302af7bf'
+            label: Text
+            name: '-302af7bf'
+            widget: string
+          - hint: 'Original text: 75,000₼, key: -4595b566'
+            label: Text
+            name: '-4595b566'
+            widget: string
+          - hint: 'Original text: 5₼, key: 2727'
+            label: Text
+            name: '2727'
+            widget: string
+          - hint: 'Original text: Dan Ulduzu, key: -17da21ae'
+            label: Text
+            name: '-17da21ae'
+            widget: string
+          - hint: 'Original text: 100,000₼, key: 21b00767'
+            label: Text
+            name: 21b00767
+            widget: string
+          - hint: 'Original text: 5X, key: 6c3'
+            label: Text
+            name: 6c3
+            widget: string
+          - hint: 'Original text: Göz Muncuğu, key: 65e69179'
+            label: Text
+            name: '65e69179'
+            widget: string
+          - hint: 'Original text: 10₼, key: de7d'
+            label: Text
+            name: de7d
+            widget: string
+          - hint: 'Original text: Şans Yağışı, key: -456c2a5c'
+            label: Text
+            name: '-456c2a5c'
+            widget: string
+          - hint: 'Original text: 200,000₼, key: -766ecbba'
+            label: Text
+            name: '-766ecbba'
+            widget: string
+          - hint: 'Original text: 10X, key: be19'
+            label: Text
+            name: be19
+            widget: string
+          - hint: 'Original text: Göz muncuğu, key: 2adf999'
+            label: Text
+            name: 2adf999
+            widget: string
+          - hint: 'Original text: Satış şəbəkəsi, key: 5b8cf441'
+            label: Text
+            name: 5b8cf441
+            widget: string
+          - hint: >-
+              Original text: Sənə hər yedə rahat olsun deyə əhatə dairəmizi daim
+              genişləndiririk., key: 7ddebcfc
+            label: Text
+            name: 7ddebcfc
+            widget: string
+          - hint: 'Original text: Satış masaları, key: 4a90f22'
+            label: Text
+            name: 4a90f22
+            widget: string
+          - hint: 'Original text: Kiosklar, key: -1aa8cbcc'
+            label: Text
+            name: '-1aa8cbcc'
+            widget: string
+          - hint: 'Original text: Misli məntəqələri, key: -72184b9'
+            label: Text
+            name: '-72184b9'
+            widget: string
+          - hint: 'Original text: Azərpoçt məntəqələri, key: 77f1ff51'
+            label: Text
+            name: 77f1ff51
+            widget: string
+          - hint: 'Original text: Mağazalar, key: -10912d00'
+            label: Text
+            name: '-10912d00'
+            widget: string
+          - hint: 'Original text: Wolt, key: 293a80'
+            label: Text
+            name: 293a80
+            widget: string
+          - hint: 'Original text: Tez-tez verilən suallar, key: -1c394b0'
+            label: Text
+            name: '-1c394b0'
+            widget: string
+          - hint: >-
+              Original text: “Azərlotereya” hansı qanuni əsasda fəaliyyət
+              göstərir? Fəaliyyəti üçün hansı lisenziya və icazələrə malikdir?,
+              key: -2bdfce37
+            label: Text
+            name: '-2bdfce37'
+            widget: text
+          - hint: >-
+              Original text: “Azərlotereya” ASC Azərbaycan Respublikasının
+              qanunvericiliyi əsasında qanuni şəkildə fəaliyyət göstərir.
+              “Azərlotereya” ASC “Azərbaycan Respublikasında lotereya
+              fəaliyyətinin təkmilləşdirilməsi haqqında” Azərbaycan Respublikası
+              Prezidentinin 23 noyabr 2001-ci il tarixli 599 saylı fərmanı ilə
+              yaradılıb və həmin fərmanla Azərbaycan Respublikasının
+              İqtisadiyyat Nazirliyi “Azərlotereya” ASC-nin təsisçisi kimi
+              müəyyən edilib.Azərbaycan Respublikasında lotereyaların təşkili və
+              keçirilməsi 5 mart 2004-cü il tarixli “Lotereyalar haqqında”
+              qanunla müəyyən edilir. Həmin qanunun 3.3-cü maddəsinə və həmin
+              qanunun tətbiq edilməsi barədə Azərbaycan Respublikası
+              Prezidentinin 26 may 2004-cü il tarixli fərmanının 2.1.-ci
+              maddəsinə uyğun olaraq, Azərbaycan Respublikasında lotereyalar
+              (stimullaşdırıcı lotereyalar istisna olmaqla) yalnız Azərbaycan
+              Respublikası Prezidentinin müəyyən etdiyi orqan (qurum) tərəfindən
+              təşkil edilir və keçirilir. Həmin fərmanın 2.5.-ci maddəsinə uyğun
+              olaraq, qeyd edilən orqan (qurum) “Azərlotereya” ASC-dir.Göründüyü
+              kimi, lotereyaların təşkili və keçirilməsi qanunla, fərmanla
+              “Azərlotereya” ASC-yə həvalə edildiyi üçün bu sahədə hər hansı
+              əlavə lisenziya, eləcə də icazə tələb edilmir., key: 58ff4d5
+            label: Text
+            name: 58ff4d5
+            widget: text
+          - hint: >-
+              Original text: Lotereya oyunları qanunla necə tənzimlənir?, key:
+              4ef9efd1
+            label: Text
+            name: 4ef9efd1
+            widget: string
+          - hint: >-
+              Original text: Lotereyaların təşkili və keçirilməsi “Lotereyalar
+              haqqında” qanunla və həmin qanun əsasında qəbul edilmiş qaydalar,
+              habelə “Azərlotereya”nın daxili siyasəti və prosedur sənədləri
+              əsasında tənzimlənir. Müvafiq qanunvericilik aktları ilə
+              “Azərlotereya”nın vebsaytındakı , key: 365017fd
+            label: Text
+            name: 365017fd
+            widget: text
+          - hint: 'Original text: Qanunvericilik aktları, key: 4c2e4629'
+            label: Text
+            name: 4c2e4629
+            widget: string
+          - hint: 'Original text:  bölməsində tanış ola bilərsən., key: 7441e440'
+            label: Text
+            name: '7441e440'
+            widget: string
+          - hint: 'Original text: Hansı ani lotereya növləri mövcuddur?, key: 20023d1'
+            label: Text
+            name: 20023d1
+            widget: string
+          - hint: >-
+              Original text: Ani lotereya biletlərimizin sırasına yeniləri əlavə
+              edilir. Mövcud və yeni ani lotereya oyunlarının növləri və
+              qaydaları ilə “Azərlotereya”nın rəsmi internet səhifəsində "Ani
+              Lotereyalar" bölməsində tanış ola bilərsən., key: 28147d0f
+            label: Text
+            name: 28147d0f
+            widget: text
+          - hint: >-
+              Original text: Lotereya biletlərini haradan əldə etmək olar?, key:
+              6190e55e
+            label: Text
+            name: 6190e55e
+            widget: string
+          - hint: >-
+              Original text: Lotereya biletlərini sənə yaxın “Azərpoçt”un
+              filiallarında, müxtəlif iri marketlər şəbəkələrində yerləşən satış
+              nöqtələrində, metrostansiyaların çıxışında əldə edə bilərsən.Bilet
+              satışı “Azərlotereya”nın “Misli” satış məntəqlərində də təşkil
+              edilir. Satış nöqtələrinin ünvanları ilə “Azərlotereya”nın , key:
+              449aea98
+            label: Text
+            name: 449aea98
+            widget: text
+          - hint: 'Original text: rəsmi saytından, key: 1aaffe73'
+            label: Text
+            name: 1aaffe73
+            widget: string
+          - hint: 'Original text:  tanış ola bilərsiniz., key: 32fa8736'
+            label: Text
+            name: 32fa8736
+            widget: string
+          - hint: >-
+              Original text: Biletin uduşlu olub-olmadığını necə yoxlamaq olar?,
+              key: -4493fe37
+            label: Text
+            name: '-4493fe37'
+            widget: string
+          - hint: >-
+              Original text: Ani lotereyalarda bilet arxasında qeyd edilən oyun
+              şərtlərinə uyğun kombinasiyalar uduşlu sayılır. Hər bir oyunçu bu
+              kombinasiyaları özü yoxlaya və ya satış nöqtələrinə yaxınlaşaraq
+              satıcı ilə dəqiqləşdirə bilər., key: -5f2087ea
+            label: Text
+            name: '-5f2087ea'
+            widget: text
+          - hint: >-
+              Original text: Bilet uduşludursa, mükafatı ən gec nə vaxt götürmək
+              olar?, key: 3bbc651
+            label: Text
+            name: 3bbc651
+            widget: string
+          - hint: "Original text: 3 000 manatadək (daxil olmaqla) uduşları satış nöqtələrindən əldə etmək mümkündür.\_3 000 manatdan yuxarı uduşlu biletlərin qəbulu\_“Bakı KOB Evi”ndə\_(Bakı, Ziya Bünyadov prospekti 38C) və\_Gəncə şəhəri,\_Fətullah Həsənov küçəsi 15B\_ünvanında həyata keçirilir. Uduş məbləği “Azərlotereya” ASC tərəfindən uduşlu lotereya bileti qəbul edildiyi tarixdən etibarən 30 iş günündən gec olmayaraq bank vasitəsilə ödənilir., key: -2503c0dc"
+            label: Text
+            name: '-2503c0dc'
+            widget: text
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: >-
+              Original text: Mükafatların ödənilmə qaydası lotereya növləri üzrə
+              aşağıdakı kimidir:, key: 2ed53e1b
+            label: Text
+            name: 2ed53e1b
+            widget: string
+          - hint: >-
+              Original text: Ani lotereyalarda uduşlu biletin "Azərlotereya" ASC
+              tərəfindən qəbulu müddəti lotereyanın keçirilməyə başlandığı
+              tarixdən başlayır və lotereya başa çatdığı tarixdən 150 təqvim
+              günü davam edir., key: -4060364b
+            label: Text
+            name: '-4060364b'
+            widget: text
+          - hint: >-
+              Original text: “Azərlotereya” lotereyaların satışını necə həyata
+              keçirir? Distribütorlar və dilerlər kimlərdir?, key: -129500f1
+            label: Text
+            name: '-129500f1'
+            widget: text
+          - hint: >-
+              Original text: Lotereya biletlərimizin satışını rəsmi distribütor
+              və dilerlərimiz vasitəsilə həyata keçiririk. Rəsmi distribütor və
+              dilerlər ilə bağlı məlumat əldə etmək üçün bu , key: -63f305f1
+            label: Text
+            name: '-63f305f1'
+            widget: text
+          - hint: 'Original text: linkə, key: 623519f'
+            label: Text
+            name: 623519f
+            widget: string
+          - hint: 'Original text:  keçid edə bilərsən., key: 378e9a6'
+            label: Text
+            name: 378e9a6
+            widget: string
+          - hint: >-
+              Original text: Əlaqə Mərkəzinə zəng edəndə balansdan pul çıxır?,
+              key: 761f2406
+            label: Text
+            name: 761f2406
+            widget: string
+          - hint: >-
+              Original text: Əlaqə Mərkəzinə (*2080 və *2090) edilən zənglər
+              müştərinin istifadə etdiyi mobil operatorların mövcud tariflərinə
+              uyğun olaraq hesablanır. “Azərlotereya” ASC tərəfindən əlavə tarif
+              haqqı tətbiq olunmur., key: 57e3ea28
+            label: Text
+            name: 57e3ea28
+            widget: text
+          - hint: >-
+              Original text: Lotereyaların satışını təşkil edənlər
+              “Azərlotereya”nın rəsmi işçiləridir?, key: -17e2aa35
+            label: Text
+            name: '-17e2aa35'
+            widget: string
+          - hint: >-
+              Original text: “Azərlotereya” satışları rəsmi distribütor və
+              dilerləri vasitəsilə həyata keçirir. Distribütor və dilerlərin
+              işçiləri “Azərlotereya”nın əməkdaşları deyil., key: 650671d6
+            label: Text
+            name: 650671d6
+            widget: text
+          - hint: >-
+              Original text: Lotereya qaydaları haqqında məlumatı hardan əldə
+              etmək olar?, key: -441e16d3
+            label: Text
+            name: '-441e16d3'
+            widget: string
+          - hint: >-
+              Original text: Hər bir lotereyanın keçirilmə qaydaları, uduş
+              fondunun tərkibi, hər bir uduşun cəmi sayı və məbləği, vergi
+              çıxılandan sonra ödənilən məbləğlər, satışa buraxılmış biletlərin
+              ümumi sayı, uduşlu biletlərin sayı bütün ani lotereya biletinin
+              arxa hissəsində və “Azərlotereya”nın rəsmi vebsaytında qeyd
+              edilir., key: -2e1382e3
+            label: Text
+            name: '-2e1382e3'
+            widget: text
+          - hint: >-
+              Original text: Ani lotereyaların uduş fondları necə formalaşır?,
+              key: 683ac1fd
+            label: Text
+            name: 683ac1fd
+            widget: string
+          - hint: "Original text: Uduş fondu “Lotereyalar haqqında” qanunda nəzərdə tutulan qaydada tənzimlənir. \_“Lotereyalar haqqında” Qanunun 6.5-ci maddəsinə uyğun olaraq ani lotereyanın uduş fondunun həcmi buraxılmış lotereya biletlərinin ümumi məbləğinin 50%-dən az olmamalıdır. “Azərlotereya” ani lotereyalarında bu göstərici 63-68% arasındadır. Yəni, satışdan əldə edilən gəlirin 68%-dək hissəsi uduş olaraq qaliblərə ödənilir., key: -52104fd7"
+            label: Text
+            name: '-52104fd7'
+            widget: text
+          - hint: >-
+              Original text: Uduş məbləğlərindən nə qədər vergi tutulur?, key:
+              -4e6eda3b
+            label: Text
+            name: '-4e6eda3b'
+            widget: string
+          - hint: "Original text: Lotereyalardan əldə edilən uduşlar vergiyə cəlb edilir. Azərbaycan Respublikası Vergi Məcəlləsinə əsasən lotereyaların keçirilməsindən pul şəklində əldə edilən uduşlardan iştirakla bağlı \_ödənilən pul vəsaiti və uduş məbləğinin 500 (beş yüz) manat hissəsi çıxılmaqla qalan məbləğdən 10 faiz dərəcə ilə vergi tutulur. \_Yəni, 500 manatadək olan uduşlar gəlir vergisindən azaddır., key: -7e8fd1a7"
+            label: Text
+            name: '-7e8fd1a7'
+            widget: text
+          - hint: >-
+              Original text: Udulan məbləğdən dövlət vergisi çıxıldıqdan sonra
+              qalanı tam şəkildə qalibə ödənilirmi?, key: 3de84eac
+            label: Text
+            name: 3de84eac
+            widget: string
+          - hint: >-
+              Original text: Vergilər çıxıldıqdan sonra müvafiq lotereya bileti
+              üzrə uduş həmin lotereya biletini təqdim edilmiş şəxsə ödənilir.
+              “Azərlotereya” tərəfindən uduşdan hər hansı komissiya haqqı
+              tutulmur., key: f5de7b6
+            label: Text
+            name: f5de7b6
+            widget: text
+          - hint: 'Original text: Lotereyalar harada istehsal olunur?, key: -19ac141a'
+            label: Text
+            name: '-19ac141a'
+            widget: string
+          - hint: >-
+              Original text: Lotereyalar “Azərlotereya”nın dünyanın aparıcı
+              lotereya oyunları şirkətlərindən biri olan “Scientific Games”
+              (ABŞ) ilə əməkdaşlığı çərçivəsində hazırlanır.Lotereya biletləri
+              “Scientific Games”in Böyük Britaniyanın Lids şəhərində yerləşən
+              yüksək texnologiyalı və təhlükəsiz müəssisələrində dünya
+              standartlarına uyğun müasir lotereyaların alqoritmləri əsasında
+              istehsal olunur., key: -696f31a4
+            label: Text
+            name: '-696f31a4'
+            widget: text
+          - hint: >-
+              Original text: Lotereyaların təşkilində təhlükəsizlik və
+              şəffaflığa necə zəmanət verilir?, key: -5e1ef42
+            label: Text
+            name: '-5e1ef42'
+            widget: string
+          - hint: "Original text: Fəaliyyətində beynəlxalq təcrübəyə əsaslanan “Azərlotereya” qlobal lotereya sənayesində önəmli yer tutan \"Scientific Games\"lə əməkdaşlıq edir. Lotereyaların təşkilində yüksək texnologiyaya sahib peşəkar şirkətlərdən sayılan \"Scientific Games\" 1974-cü ildən dünyada ilk təhlükəsiz lotereya oyunlarının hazırlanması ilə tanınır. “Azərlotereya”nın bütün ani lotereya biletləri şirkətin Böyük Britaniyada \_yerləşən ofisində dizayn və çap edilir. “Azərlotereya”nın fəaliyyəti qanunvericiliyə uyğun olaraq dövlət tərəfindən tənzimlənir və audit şirkəti tərəfindən audit olunur. Bu da şəffaflıq və təhlükəsizliyin əlavə zəmanətləridir., key: 10afaccd"
+            label: Text
+            name: 10afaccd
+            widget: text
+          - hint: >-
+              Original text: Dövriyyəyə saxta lotereyalar girə bilərmi? Vətəndaş
+              lotereyanın saxta olub-olmadığını necə ayırd edə bilər?, key:
+              -7774aaab
+            label: Text
+            name: '-7774aaab'
+            widget: text
+          - hint: >-
+              Original text: Biletlərdə gözlə görünən və “Azərlotereya”
+              tərəfindən xüsusi sistem vasitəsilə yoxlanan təhlükəsizlik
+              tədbirləri mövcuddur. Vətəndaşlar bilet alarkən diqqətli
+              davranmalı, onun hər hansı bir hissəsinin daha öncə
+              pozulub-pozulmadığından əmin olmalıdırlar. Lotereya biletlərini
+              “Azərlotereya”nın distribütor və dilerlərinə məxsus satış
+              nöqtələrindən əldə etmək tövsiyə olunur., key: -4f4f39d8
+            label: Text
+            name: '-4f4f39d8'
+            widget: text
+          - hint: 'Original text: Məsuliyyətlə oyna, key: -7c3c3cb6'
+            label: Text
+            name: '-7c3c3cb6'
+            widget: string
+          - hint: 'Original text: Ürəyincə əylən, key: 5d1d9292'
+            label: Text
+            name: 5d1d9292
+            widget: string
+          - hint: >-
+              Original text: Bu bir əyləncəli oyundur. Qazanc və gəlir yeri kimi
+              baxmadan oynasan, həyəcan və əyləncədən hər zaman həzz alarsan,
+              key: -213d6c51
+            label: Text
+            name: '-213d6c51'
+            widget: text
+          - hint: 'Original text: Xəbərin olsun, key: 26badf0e'
+            label: Text
+            name: 26badf0e
+            widget: string
+          - hint: >-
+              Original text: Bəxtini yoxlamazdan əvvəl şərt, qayda və əmsallar
+              haqqında məlumat topla. Məlumatlı olsan, daha intizamlı və
+              məsuliyyətli olarsan, key: 7565cd4b
+            label: Text
+            name: 7565cd4b
+            widget: text
+          - hint: 'Original text: Təmkinli olan qazanar, key: 74d728ad'
+            label: Text
+            name: 74d728ad
+            widget: string
+          - hint: >-
+              Original text: Özün üçün oyun və zaman limiti təyin et və ona
+              sadiq qalmağa çalış. Daha çox oyun daha çox qazanma şansı deyil.
+              Fasilə verməkdə fayda var., key: 2b880189
+            label: Text
+            name: 2b880189
+            widget: text
+          - hint: 'Original text: 18+ yaş məhdudiyyəti, key: 70946561'
+            label: Text
+            name: '70946561'
+            widget: string
+          - hint: >-
+              Original text: Yalnız 18 yaşı tamam olmuş şəxslər idman mərc və
+              lotereya oyunlarımızda iştirak edə bilər, key: 205d9dd3
+            label: Text
+            name: 205d9dd3
+            widget: string
+          - hint: 'Original text: Bizimlə əlaqə saxla, key: 212be139'
+            label: Text
+            name: 212be139
+            widget: string
+          - hint: 'Original text: *2070, key: 26750c1'
+            label: Text
+            name: 26750c1
+            widget: string
+          - hint: 'Original text: “Məsuliyyətli oyun” dəstək xətti, key: db4237'
+            label: Text
+            name: db4237
+            widget: string
+          - hint: 'Original text: *2080, key: 26750e0'
+            label: Text
+            name: '26750e0'
+            widget: string
+          - hint: 'Original text: Əlaqə mərkəzi, key: -24de7771'
+            label: Text
+            name: '-24de7771'
+            widget: string
+          - hint: 'Original text: *2090, key: 26750ff'
+            label: Text
+            name: 26750ff
+            widget: string
+          - hint: 'Original text: Diler çağrı mərkəzi, key: -71daa7c5'
+            label: Text
+            name: '-71daa7c5'
+            widget: string
+          - hint: 'Original text: Ünvan:, key: 7daf5f89'
+            label: Text
+            name: 7daf5f89
+            widget: string
+          - hint: >-
+              Original text: Neftçilər prospekti 153, Bakı, Azərbaycan, key:
+              -7ebc5519
+            label: Text
+            name: '-7ebc5519'
+            widget: string
+          - hint: 'Original text: E-poçt:, key: -6ac7c47a'
+            label: Text
+            name: '-6ac7c47a'
+            widget: string
+          - hint: 'Original text: support@azerlotereya.com, key: 4d7d42b9'
+            label: Text
+            name: 4d7d42b9
+            widget: string
+          - hint: 'Original text: Sosial şəbəkələr:, key: 3fcd8d7'
+            label: Text
+            name: 3fcd8d7
+            widget: string
+          - hint: 'Original text: Copyright © Azərlotereya 2023, key: -1aa626f2'
+            label: Text
+            name: '-1aa626f2'
+            widget: string
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: 'Original text: Password, key: 4c641ebb'
+            label: Text
+            name: 4c641ebb
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: https://azerlotereya.com, key: -6c0648c9'
+            label: Link
+            name: '-6c0648c9'
+            widget: string
+          - hint: 'Original link: #satis-sebekesi, key: -4f6ef2bb'
+            label: Link
+            name: '-4f6ef2bb'
+            widget: string
+          - hint: 'Original link: #oyunlar, key: -74468c9'
+            label: Link
+            name: '-74468c9'
+            widget: string
+          - hint: >-
+              Original link: https://maps.app.goo.gl/URmw8uDiHVSwFbt26, key:
+              -9bbfeed
+            label: Link
+            name: '-9bbfeed'
+            widget: string
+          - hint: >-
+              Original link: https://maps.app.goo.gl/WHKq4kQsR9bzTfDH7, key:
+              -3966283c
+            label: Link
+            name: '-3966283c'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/143, key:
+              -580b2324
+            label: Link
+            name: '-580b2324'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/134, key:
+              -580b2342
+            label: Link
+            name: '-580b2342'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/137, key:
+              -580b233f
+            label: Link
+            name: '-580b233f'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/113, key:
+              -580b2381
+            label: Link
+            name: '-580b2381'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/128, key:
+              -580b235d
+            label: Link
+            name: '-580b235d'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/141, key:
+              -580b2326
+            label: Link
+            name: '-580b2326'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/131, key:
+              -580b2345
+            label: Link
+            name: '-580b2345'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/109, key:
+              -580b239a
+            label: Link
+            name: '-580b239a'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/111, key:
+              -580b2383
+            label: Link
+            name: '-580b2383'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/91, key:
+              -44e794d4
+            label: Link
+            name: '-44e794d4'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/12, key:
+              -44e795cb
+            label: Link
+            name: '-44e795cb'
+            widget: string
+          - hint: 'Original link: https://azerlotereya.com/, key: -14c2d028'
+            label: Link
+            name: '-14c2d028'
+            widget: string
+          - hint: >-
+              Original link: https://azerlotereya.com/az/content/26, key:
+              -44e795a8
+            label: Link
+            name: '-44e795a8'
+            widget: string
+          - hint: 'Original link: tel:*2070, key: -1ea59b5e'
+            label: Link
+            name: '-1ea59b5e'
+            widget: string
+          - hint: 'Original link: tel:*2080, key: -1ea59b3f'
+            label: Link
+            name: '-1ea59b3f'
+            widget: string
+          - hint: 'Original link: http://*2090, key: -4717ddd3'
+            label: Link
+            name: '-4717ddd3'
+            widget: string
+          - hint: >-
+              Original link: https://maps.app.goo.gl/KsPLtmQJpk9Zqr9i9, key:
+              -751c6258
+            label: Link
+            name: '-751c6258'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:support@azerlotereya.com?subject=%C6%8Flaq%C9%99, key:
+              5a6f641c
+            label: Link
+            name: 5a6f641c
+            widget: string
+          - hint: >-
+              Original link: https://www.facebook.com/azerlotereya, key:
+              77746445
+            label: Link
+            name: '77746445'
+            widget: string
+          - hint: >-
+              Original link: https://www.instagram.com/azerlotereya/, key:
+              1e844caa
+            label: Link
+            name: 1e844caa
+            widget: string
+          - hint: >-
+              Original link: https://www.youtube.com/user/AzerlotereyaUpdate,
+              key: cc25303
+            label: Link
+            name: cc25303
+            widget: string
+          - hint: 'Original link: https://t.me/Azerlotereya, key: 76fe8523'
+            label: Link
+            name: 76fe8523
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.world-lotteries.org/members/our-members/lottery-members?filter-region=&filter-country=Azerbaijan,
+              key: 469919e7
+            label: Link
+            name: '469919e7'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.european-lotteries.org/members?f%5B0%5D=country%3A1487,
+              key: -4ed79a24
+            label: Link
+            name: '-4ed79a24'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 6779173e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4ea8342
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i534c960c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: a8d7372
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i352abb9e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '5e850822'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5b37ac9a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4d57c53e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1dcdc862
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6a7c2bf8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '33887502'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-538a7b80'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-52ad7b19'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '5512438'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1768254a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-34216ecc'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-50dab84e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6d9401d0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 75b2b4ae
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 58f96b2c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3c4021aa
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-f5605e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 41f5a08
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-230f4b3e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-17d0b3be'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3d15893e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 107bf102
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 308e56c2
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-65aaf55e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2ea00808'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6a2c8bd6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6ea60a98
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-333a76fe'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 8e2ecd1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 10b5c1bc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 14d5745
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4a13e8c3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2be386ec'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 36c5e456
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2dcab44e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-33baf741'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1af59d11
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3bdbe6b8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-36c84eff'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1f09b9f2
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7a700be7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
